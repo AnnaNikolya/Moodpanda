@@ -1,7 +1,11 @@
+package tests;
+
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import page.*;
+import steps.LoginSteps;
+import steps.MoodUpdateModalSteps;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
@@ -11,6 +15,9 @@ public class BaseTest {
     MoodUpdatedModalPage moodUpdatedModalPage;
     MyDiaryPage myDiaryPage;
     RateYourHappinessModalPage rateYourHappinessModalPage;
+
+    LoginSteps loginSteps;
+    MoodUpdateModalSteps moodUpdateModalSteps;
 
     @BeforeMethod
     public void init() {

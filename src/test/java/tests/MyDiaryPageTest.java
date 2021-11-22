@@ -1,27 +1,27 @@
-import com.codeborne.selenide.SelenideElement;
+package tests;
+
 import javafx.scene.input.InputMethodTextRun;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import steps.LoginSteps;
 
-public class MyDiaryPageTest extends BaseTest{
+import static constants.IConstantsTest.EMAIL;
+import static constants.IConstantsTest.PASSWORD;
+
+public class MyDiaryPageTest extends BaseTest {
 
 
     private InputMethodTextRun element;
 
-    @Test
-    public void openDiary() {
-        open("https://moodpanda.com/Feed");
-        $(By.xpath("//*[@id='UpdateMood']/div/div/div[3]/button[2]")).click();
-        SelenideElement element = $(By.tagName("Support us - become a Patron"));
-        if (this.element.getText().equals("Support us - become a Patron")) {
-            System.out.println("Match found");
-        } else {
-            System.out.println("Match Not found");
-        }
-        Assert.assertEquals(this.element.getText(), "Support us - become a Patron");
+
+    @Test(description = "check the description in the post")
+    public void descriptionTest() {
+        int moodValue = 8;
+        String description = "I'm so happy!";
+        LoginSteps.login(EMAIL, PASSWORD);
+        moodUpdateModalSteps.updateMoodAndGoToDiary(moodValue, description);
+        String textPost = feedPage.getPostText();
+        Assert.assertEquals(textPost, description);
     }
+
 }
