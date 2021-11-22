@@ -1,13 +1,13 @@
+package tests;
+
 import com.codeborne.selenide.Configuration;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import page.*;
+import steps.LoginSteps;
+import steps.MoodUpdateModalSteps;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
 public class BaseTest {
     LoginPage loginPage;
@@ -16,17 +16,15 @@ public class BaseTest {
     MyDiaryPage myDiaryPage;
     RateYourHappinessModalPage rateYourHappinessModalPage;
 
+    LoginSteps loginSteps;
+    MoodUpdateModalSteps moodUpdateModalSteps;
+
     @BeforeMethod
     public void init() {
         Configuration.browser = "chrome";
-        Configuration.timeout = 15000;
+        Configuration.timeout = 30000;
         Configuration.holdBrowserOpen = true;
         Configuration.headless = false;
-       // ChromeOptions chromeOptions = new ChromeOptions();
-       // chromeOptions.addArguments("--disable-pop-blocking");
-       // WebDriver driver = new ChromeDriver(chromeOptions);
-      //  setWebDriver(driver);
-
         loginPage = new LoginPage();
         feedPage = new FeedPage();
         moodUpdatedModalPage = new MoodUpdatedModalPage();
